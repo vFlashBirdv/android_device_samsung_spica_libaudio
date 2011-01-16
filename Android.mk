@@ -1,7 +1,5 @@
 LOCAL_PATH:= $(call my-dir)
 
-#ifeq ($(TARGET_DEVICE),crespo)
-
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES:= aplay.c alsa_pcm.c alsa_mixer.c
 LOCAL_MODULE:= aplay
@@ -30,6 +28,10 @@ LOCAL_STATIC_LIBRARIES:= libaudiointerface
 LOCAL_SHARED_LIBRARIES:= libc libcutils libutils libmedia libhardware_legacy
 ifeq ($(BOARD_HAVE_BLUETOOTH),true)
   LOCAL_SHARED_LIBRARIES += liba2dp
+endif
+
+ifeq ($(BOARD_HAVE_FM_RADIO),true)
+  LOCAL_CFLAGS += -DHAVE_FM_RADIO
 endif
 
 ifeq ($(TARGET_SIMULATOR),true)
